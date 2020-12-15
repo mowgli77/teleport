@@ -43,7 +43,7 @@ function App() {
                     <div></div>
                     <div></div>
                 </div>
-                <div>{url}</div>
+                {/*<div>{url}</div>*/}
             </div>
         </BrowserRouter>
     )
