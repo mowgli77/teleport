@@ -4,6 +4,10 @@ const path = require('path')
 
 const app = express()
 
+app.use(express.json({ extended: true }))
+
+app.use('/', require('./routes/teleport.routes'))
+
 if (process.env.NODE_ENV === 'production') {
     app.use('/', express.static(path.join(__dirname, 'client', 'build')))
 

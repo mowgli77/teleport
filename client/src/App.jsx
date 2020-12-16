@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import './App.css'
-import {Route, BrowserRouter} from "react-router-dom";
-import axios from "axios";
+import {Route, BrowserRouter } from "react-router-dom";
 
 function App() {
 
@@ -9,41 +8,31 @@ function App() {
 
     const getUrl = async () => {
         try {
-            const response = await axios.get('https://ad.admitad.com/tpt/r889udt5ea7ae3e44f49a499575f91/')
-            const data = await response.data
-            setUrl(data)
-            console.log(data)
+            const response = await fetch('/teleport')
+            const data = await response.json()
+            setUrl(data[0])
         } catch (e) {
             console.log(e)
         }
     }
 
-    // const getUrl = async () => {
-    //     try {
-    //         const response = await fetch('https://ad.admitad.com/tpt/r889udt5ea7ae3e44f49a499575f91/')
-    //         const data = await response.json()
-    //         console.log(data)
-    //     } catch (e) {
-    //         console.log(e)
-    //     }
-    // }
-
     useEffect(() => {
         getUrl()
     }, [])
 
-
     return (
         <BrowserRouter>
             <div className={"loader"}>
-                {/*<Route path='/' component={() => { window.location = url; return null;} }/>*/}
+                { url && <Route path='/' component={() => {
+                    window.location = url;
+                    return null;
+                }}/>}
                 <div className="lds-ring">
                     <div></div>
                     <div></div>
                     <div></div>
                     <div></div>
                 </div>
-                <div>{url}</div>
             </div>
         </BrowserRouter>
     )
